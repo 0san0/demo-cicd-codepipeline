@@ -5,11 +5,10 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-      - cd web
   build:
     commands:
       - echo Run unit test
-      - docker-compose run web python test_basic.py
+      - docker-compose run python test_basic.py
       - echo Build started on `date`
       - echo Building the Docker image...          
       - docker build -t $IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION .
